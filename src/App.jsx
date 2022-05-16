@@ -1,13 +1,20 @@
 import { Route, Routes } from "react-router-dom";
-import { State, Home } from "./pages";
+import { State, Home, SignIn } from "./pages";
+import { AuthGuard } from "./components/auth";
 
 export function App() {
   return (
-    <div className="w-screen h-screen flex justify-center items-center flex-col bg-zinc-900 space-y-2">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/state" element={<State />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <AuthGuard>
+            <Home />
+          </AuthGuard>
+        }
+      />
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/state" element={<State />} />
+    </Routes>
   );
 }

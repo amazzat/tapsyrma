@@ -1,19 +1,26 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useGetAllNamesQuery } from "../api";
+import { isAuthLoadingSelector, userSelector } from "../store/auth";
+import { supabase } from "../lib/supabase";
 
 export function Home() {
-  const { data } = useGetAllNamesQuery();
+  const user = useSelector(userSelector);
+  const isAuthLoading = useSelector(isAuthLoadingSelector);
+
   return (
     <>
-      <pre className="text-zinc-300 font-mono text-xs whitespace-pre-wrap m-4">
-        {JSON.stringify(data, null, 2)}
+      <pre className="m-4 whitespace-pre-wrap font-mono text-xs text-zinc-300">
+        {JSON.stringify({ user, isAuthLoading }, null, 2)}
       </pre>
       <Link
         to="/state"
-        className="text-zinc-300 hover:text-zinc-500 transition-colors duration-150 ease-in underline  underline-offset-2 "
+        className="text-zinc-300 underline underline-offset-2 transition-colors duration-150 ease-in  hover:text-zinc-500 "
       >
         Go to state
       </Link>
+      <button type="button" onClick={() => supabase.auth.signOut()}>
+        Sign out
+      </button>
     </>
   );
 }

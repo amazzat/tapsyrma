@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { initialState } from "./initialState";
 import { sum } from "../../lib/sum";
+
+const initialState = {
+  value: 0
+};
 
 export const counterSlice = createSlice({
   name: "counter",

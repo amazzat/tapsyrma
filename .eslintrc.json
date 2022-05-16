@@ -19,6 +19,8 @@
   "plugins": ["react"],
   "rules": {
     "import/prefer-default-export": 0,
-    "no-param-reassign": ["error", { "props": false }]
+    "no-param-reassign": 0,
+    "react/prop-types": 0,
+    "react/jsx-props-no-spreading": 0
   }
 }
