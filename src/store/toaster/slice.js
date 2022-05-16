@@ -10,7 +10,8 @@ export const toasterSlice = createSlice({
   initialState,
   reducers: {
     addToast: (state, action) => {
-      state.toasts.push(action.payload);
+      state.toasts.push({ ...action.payload, id: state.id });
+      state.id += 1;
     },
     hideById: (state, action) => {
       const index = state.toasts.findIndex(
@@ -18,9 +19,6 @@ export const toasterSlice = createSlice({
       );
 
       state.toasts[index].show = false;
-    },
-    increaseId: (state) => {
-      state.id += 1;
     }
   }
 });

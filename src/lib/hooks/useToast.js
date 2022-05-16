@@ -1,18 +1,13 @@
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addToast, increaseId, toastIdSelector } from "../../store/toaster";
+import { useDispatch } from "react-redux";
+import { addToast } from "../../store/toaster";
 
 export function useToast() {
   const dispatch = useDispatch();
-  const toastId = useSelector(toastIdSelector);
 
-  const toast = useCallback(
-    (text, timeout) => {
-      dispatch(addToast({ text, id: toastId, show: true, timeout }));
-      dispatch(increaseId());
-    },
-    [toastId]
-  );
+  const toast = useCallback((text, type = "info", timeout = 3000) => {
+    dispatch(addToast({ text, show: true, timeout, type }));
+  }, []);
 
   return toast;
 }

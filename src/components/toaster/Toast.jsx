@@ -1,27 +1,39 @@
+import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { hideById } from "../../store/toaster";
 
-export function Toast({ text, id, show, timeout }) {
+export function Toast({ text, id, show, timeout, type }) {
   const dispatch = useDispatch();
+
+  const hideSelf = useCallback(() => {
+    dispatch(hideById(id));
+  }, [id]);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      dispatch(hideById(id));
+      hideSelf();
     }, timeout);
 
     return () => clearTimeout(timeoutId);
-  }, [id, timeout]);
+  }, [hideSelf, timeout]);
 
   return (
     <AnimatePresence>
       {show && (
         <motion.div
+          onClick={hideSelf}
           initial={{ y: -200, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 50, opacity: 0 }}
-          className="rounded-lg border border-sky-900 bg-sky-700 py-3 px-6 text-base font-medium text-zinc-300 shadow-inner"
+          className={clsx([
+            "cursor-pointer rounded-lg border py-3 px-6 text-base font-medium text-zinc-300 shadow-inner",
+            type === "info" && "border-sky-900 bg-sky-700",
+            type === "error" && "border-red-800 bg-red-600",
+            type === "warning" && "border-amber-800 bg-amber-600",
+            type === "success" && "border-green-900 bg-green-700"
+          ])}
         >
           {text}
         </motion.div>

@@ -1,25 +1,31 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { supabase } from "../../lib/supabase";
-import { setUser } from "../../store/auth";
+import { setLoading, setUser } from "../../store/auth";
 
 export function WithAuth({ children }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(setLoading(true));
     const session = supabase.auth.session();
 
-    console.log("Session - ", !!session);
-    dispatch(setUser(session?.user ?? null));
+    if (session) {
+      dispatch(setUser(session.user ?? null));
+      dispatch(setLoading(false));
+    }
+
+    dispatch(setLoading(false));
 
     const { data: listener } = supabase.auth.onAuthStateChange(
       async (_event, _session) => {
-        setUser(_session?.user ?? null);
+        dispatch(setUser(_session?.user ?? null));
       }
     );
 
     return () => {
       listener?.unsubscribe();
+      dispatch(setLoading(false));
     };
   }, []);
 
