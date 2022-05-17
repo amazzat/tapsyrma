@@ -1,31 +1,29 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, Input } from "../components/common";
 import { TextLink } from "../components/common/TextLink";
 import { useToast } from "../lib/hooks/useToast";
 import { supabase } from "../lib/supabase";
 
-export function SignIn() {
+export function SignUp() {
   const { register, handleSubmit } = useForm();
-  const location = useLocation();
   const navigate = useNavigate();
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data) => {
     setIsLoading(true);
-    const { error } = await supabase.auth.signIn(data);
+    const { error } = await supabase.auth.signUp(data);
 
     setIsLoading(false);
     if (error) {
       toast(error.message, "error", 3000);
     } else {
-      navigate(
-        location.state?.from ?? {
-          pathname: "/"
-        }
-      );
+      toast("Confirm your email address", "info", 3000);
+      navigate({
+        pathname: "/a/signin"
+      });
     }
   };
 
@@ -36,7 +34,7 @@ export function SignIn() {
         onSubmit={handleSubmit(onSubmit)}
       >
         <h1 className="mb-4 text-center text-xl font-bold text-white">
-          Welcome back 👋
+          Join management club 🪩
         </h1>
         <div>
           <Input
@@ -53,14 +51,11 @@ export function SignIn() {
           />
         </div>
         <Button type="submit" disabled={isLoading}>
-          Sign in
+          Sign up
         </Button>
         <div className="flex flex-col justify-center space-y-2 text-sm">
-          <Link to="/a/signup">
-            <TextLink>Don&apos;t have account yet?</TextLink>
-          </Link>
-          <Link to="/a/recover">
-            <TextLink>Forgot password</TextLink>
+          <Link to="/a/signin">
+            <TextLink>Already have account?</TextLink>
           </Link>
         </div>
       </form>

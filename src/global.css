@@ -9,3 +9,7 @@ html {
 #root {
   @apply min-h-screen min-w-[360px];
 }
+
+button {
+  @apply focus:outline-none focus:ring-0 disabled:cursor-not-allowed;
+}
