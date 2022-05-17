@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import { isAuthLoadingSelector, userSelector } from "../../store/auth";
-import { Emoji } from "../Loader/Emoji";
+import { Emoji } from "../loader/Emoji";
 
 export function AuthGuard({ children }) {
   const user = useSelector(userSelector);

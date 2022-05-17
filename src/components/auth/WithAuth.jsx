@@ -27,7 +27,7 @@ export function WithAuth({ children }) {
       listener?.unsubscribe();
       dispatch(setLoading(false));
     };
-  }, []);
+  }, [dispatch]);
 
   return children;
 }

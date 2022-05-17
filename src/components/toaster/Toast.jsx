@@ -9,7 +9,7 @@ export function Toast({ text, id, show, timeout, type }) {
 
   const hideSelf = useCallback(() => {
     dispatch(hideById(id));
-  }, [id]);
+  }, [dispatch, id]);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
