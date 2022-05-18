@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { hideById } from "../../store/toaster";
@@ -22,7 +22,7 @@ export function Toast({ text, id, show, timeout, type }) {
   return (
     <AnimatePresence>
       {show && (
-        <motion.div
+        <m.div
           onClick={hideSelf}
           initial={{ y: -200, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -36,7 +36,7 @@ export function Toast({ text, id, show, timeout, type }) {
           ])}
         >
           {text}
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );
