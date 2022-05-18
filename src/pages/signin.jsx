@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Button, Input } from "../components/common";
-import { TextLink } from "../components/common/TextLink";
 import { useToast } from "../lib/hooks/useToast";
 import { supabase } from "../lib/supabase";
 
@@ -30,40 +28,45 @@ export function SignIn() {
   };
 
   return (
-    <div className="flex h-screen w-full items-center justify-center">
+    <main className="flex h-screen w-full items-center justify-center">
       <form
-        className="flex h-full flex-1  flex-col justify-center  space-y-4 border-neutral-700 bg-neutral-800 p-6 shadow-inner sm:block sm:h-fit sm:max-w-sm sm:rounded-lg sm:border"
+        className="h-full flex-1 flex-col space-y-4 border-neutral-700 bg-neutral-800 p-6 shadow-inner sm:block sm:h-fit sm:max-w-sm sm:rounded-lg sm:border"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <h1 className="mb-4 text-center text-xl font-bold text-white">
+        <h1 className="mb-4 text-center text-xl font-bold text-zinc-50">
           Welcome back 👋
         </h1>
-        <div>
-          <Input
+        <label htmlFor="email">
+          <div className="input-label">Email address</div>
+          <input
             type="email"
+            className="input w-full"
             placeholder="Your e-mail address..."
             {...register("email", { required: true, disabled: isLoading })}
           />
-        </div>
-        <div>
-          <Input
+        </label>
+        <label htmlFor="password">
+          <div className="input-label">Password</div>
+          <input
             type="password"
+            className="input w-full"
             placeholder="Your password..."
             {...register("password", { required: true, disabled: isLoading })}
           />
-        </div>
-        <Button type="submit" disabled={isLoading}>
+        </label>
+        <button type="submit" disabled={isLoading} className="btn w-full">
           Sign in
-        </Button>
-        <div className="flex flex-col justify-center space-y-2 text-sm">
-          <Link to="/a/signup">
-            <TextLink>Don&apos;t have account yet?</TextLink>
+        </button>
+        <div className="space-y-2">
+          <Link to="/a/signup" className="link text-center text-sm">
+            Don&apos;t have account yet?
           </Link>
-          <Link to="/a/recover">
-            <TextLink>Forgot password</TextLink>
-          </Link>
+          {/* Recovery does not work yet */}
+          {/* <Link to="/a/recover" className="link text-center text-sm">
+            Forgot password
+          </Link> */}
         </div>
       </form>
-    </div>
+    </main>
   );
 }

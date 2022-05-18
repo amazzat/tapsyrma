@@ -1,5 +1,8 @@
 import clsx from "clsx";
 
+/**
+ * @deprecated Use component classes
+ */
 export function TextLink({ children }) {
   return (
     <div

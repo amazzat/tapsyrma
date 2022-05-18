@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Input } from "../components/common";
-import { TextLink } from "../components/common/TextLink";
 import { useToast } from "../lib/hooks/useToast";
 import { supabase } from "../lib/supabase";
 
@@ -28,37 +26,45 @@ export function SignUp() {
   };
 
   return (
-    <div className="flex h-screen w-full items-center justify-center">
+    <main className="flex h-screen w-full items-center justify-center">
       <form
-        className="flex h-full flex-1  flex-col justify-center  space-y-4 border-neutral-700 bg-neutral-800 p-6 shadow-inner sm:block sm:h-fit sm:max-w-sm sm:rounded-lg sm:border"
+        className="h-full flex-1 flex-col space-y-4 border-neutral-700 bg-neutral-800 p-6 shadow-inner sm:block sm:h-fit sm:max-w-sm sm:rounded-lg sm:border"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <h1 className="mb-4 text-center text-xl font-bold text-white">
+        <h1 className="mb-4 text-center text-xl font-bold text-zinc-50">
           Join management club 🪩
         </h1>
-        <div>
-          <Input
+        <label htmlFor="email">
+          <div className="input-label required">Email address</div>
+          <input
             type="email"
+            className="input w-full"
             placeholder="Your e-mail address..."
             {...register("email", { required: true, disabled: isLoading })}
           />
-        </div>
-        <div>
-          <Input
+        </label>
+        <label htmlFor="password">
+          <div className="input-label required">Password</div>
+          <input
             type="password"
+            className="input w-full"
             placeholder="Your password..."
             {...register("password", { required: true, disabled: isLoading })}
           />
-        </div>
-        <Button type="submit" disabled={isLoading}>
+        </label>
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="btn btn-success w-full"
+        >
           Sign up
-        </Button>
+        </button>
         <div className="flex flex-col justify-center space-y-2 text-sm">
-          <Link to="/a/signin">
-            <TextLink>Already have account?</TextLink>
+          <Link to="/a/signin" className="link text-center text-sm">
+            Already have account?
           </Link>
         </div>
       </form>
-    </div>
+    </main>
   );
 }

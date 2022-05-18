@@ -4,6 +4,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "../common/Button";
 
+/**
+ * @deprecated Shit code, don't use it
+ */
 export function Modal({ onCancel, onConfirm, show, description, title }) {
   return (
     <AnimatePresence>

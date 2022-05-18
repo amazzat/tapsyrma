@@ -1,11 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import { AuthGuard, AuthGuardPrevent } from "./components/auth";
-import { useRecovery } from "./lib/hooks";
-import { Home, Recover, SignIn, SignUp } from "./pages";
+import { Home, SignIn, SignUp } from "./pages";
 
 export function App() {
-  useRecovery();
-
   return (
     <Routes>
       <Route
@@ -33,14 +30,15 @@ export function App() {
             </AuthGuardPrevent>
           }
         />
-        <Route
+        {/* Recovery does not work yet */}
+        {/* <Route
           path="recover"
           element={
             <AuthGuardPrevent>
               <Recover />
             </AuthGuardPrevent>
           }
-        />
+        /> */}
       </Route>
     </Routes>
   );

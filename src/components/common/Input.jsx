@@ -1,6 +1,9 @@
 import clsx from "clsx";
 import { forwardRef } from "react";
 
+/**
+ * @deprecated Use component classes
+ */
 export const Input = forwardRef(({ className, ...props }, ref) => (
   <input
     ref={ref}

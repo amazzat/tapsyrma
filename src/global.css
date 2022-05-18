@@ -2,14 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  @apply bg-neutral-900;
-}
-
 #root {
   @apply min-h-screen min-w-[360px];
 }
 
-button {
-  @apply focus:outline-none focus:ring-0 disabled:cursor-not-allowed;
+@layer base {
+  html {
+    @apply bg-neutral-900;
+  }
+  label {
+    @apply block;
+  }
+  a {
+    @apply block;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply rounded-lg border-2 border-sky-700 bg-sky-600 px-5 py-2 text-lg font-medium text-zinc-50 transition-colors duration-100 ease-linear hover:border-sky-800 hover:bg-sky-700 hover:text-zinc-100 focus:border-sky-400 focus:outline-none focus:ring-0;
+  }
+  .btn-success {
+    @apply border-emerald-700 bg-emerald-600  hover:border-emerald-800 hover:bg-emerald-700 focus:border-emerald-400;
+  }
+  .btn-error {
+    @apply border-red-700 bg-red-600  hover:border-red-800 hover:bg-red-700 focus:border-red-400;
+  }
+  .btn-warning {
+    @apply border-amber-700 bg-amber-600  hover:border-amber-800 hover:bg-amber-700 focus:border-amber-400;
+  }
+  .btn-icon {
+    @apply border-zinc-800 bg-zinc-700  hover:border-zinc-700 hover:bg-zinc-800 focus:border-zinc-400;
+  }
+  .link {
+    @apply text-lg font-medium text-zinc-50 transition-colors duration-100 ease-linear hover:text-zinc-400 focus:outline-offset-4 focus:outline-zinc-100;
+  }
+  .link-text {
+    @apply underline-offset-4 hover:underline;
+  }
+  .input {
+    @apply rounded-lg border border-zinc-900 bg-zinc-900 px-3 py-2 text-base text-zinc-100 transition-colors duration-150 ease-linear placeholder:text-zinc-600 focus:border-zinc-500 focus:ring-0;
+  }
+  .input-label {
+    @apply my-1 text-base text-zinc-50;
+  }
+  .required {
+    @apply after:px-1 after:text-red-500 after:content-['*'];
+  }
 }

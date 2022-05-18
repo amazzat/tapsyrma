@@ -1,6 +1,9 @@
 import clsx from "clsx";
 import { forwardRef } from "react";
 
+/**
+ * @deprecated Use component classes
+ */
 export const Button = forwardRef(({ className, children, ...props }, ref) => (
   <button
     ref={ref}
