@@ -32,7 +32,7 @@ export function SignUp() {
         onSubmit={handleSubmit(onSubmit)}
       >
         <h1 className="mb-4 text-center text-xl font-bold text-zinc-50">
-          Join management club 🪩
+          Join management club 🎯
         </h1>
         <label htmlFor="email">
           <div className="input-label required">Email address</div>
