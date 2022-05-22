@@ -40,7 +40,7 @@ export function App() {
           }
         /> */}
       </Route>
-      <Route 
+      <Route
         path="projects"
         element={
           <AuthGuard>
