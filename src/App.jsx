@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { AuthGuard, AuthGuardPrevent } from "./components/auth";
-import { Home, SignIn, SignUp } from "./pages";
+import { Home, SignIn, SignUp, Projects } from "./pages";
 
 export function App() {
   return (
@@ -40,6 +40,14 @@ export function App() {
           }
         /> */}
       </Route>
+      <Route 
+        path="projects"
+        element={
+          <AuthGuard>
+            <Projects />
+          </AuthGuard>
+        }
+      />
     </Routes>
   );
 }
