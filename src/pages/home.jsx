@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import { userSelector } from "../store/auth";
 
@@ -17,6 +18,9 @@ export function Home() {
       <button className="btn btn-error" type="button" onClick={Logout}>
         Sign out
       </button>
+      <Link to="/projects" className="link text-center text-sm">
+        Projects
+      </Link>
     </div>
   );
 }
