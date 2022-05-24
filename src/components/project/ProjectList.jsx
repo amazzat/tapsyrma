@@ -11,22 +11,28 @@ export function ProjectList() {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <div>
-      {data?.map((project) => (
-        <ProjectItem key={project.project_id} project={project} />
-      ))}
+    <div className="p-20">
+      <h2 className="text-5xl text-center text-zinc-100">Projects</h2>
 
-      <button
-        className="btn-success"
-        type="button"
-        onClick={() => setModalVisible(true)}
-      >
-        Create project
-      </button>
+      <div className="grid grid-cols-4 p-10 gap-10">
+        <button
+          className="btn btn-success text-2xl h-44 w-80 rounded"
+          type="button"
+          onClick={() => setModalVisible(true)}
+        >
+          + Create project
+        </button>
+
+        {data?.map((project) => (
+          <ProjectItem key={project.project_id} project={project} />
+        ))}
+      </div>
+
       <CreateProjectModal
-        show={modalVisible}
-        onHide={() => setModalVisible(false)}
-      />
+          show={modalVisible}
+          onHide={() => setModalVisible(false)}
+        />
     </div>
+    
   );
 }
