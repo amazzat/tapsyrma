@@ -12,11 +12,11 @@ export function ProjectList() {
 
   return (
     <div className="p-20">
-      <h2 className="text-5xl text-center text-zinc-100">Projects</h2>
+      <h2 className="text-center text-5xl text-zinc-100">Projects</h2>
 
-      <div className="grid grid-cols-4 p-10 gap-10">
+      <div className="grid grid-cols-4 gap-10 p-10">
         <button
-          className="btn btn-success text-2xl h-44 w-80 rounded"
+          className="btn btn-success h-44 w-80 rounded text-2xl"
           type="button"
           onClick={() => setModalVisible(true)}
         >
@@ -29,10 +29,9 @@ export function ProjectList() {
       </div>
 
       <CreateProjectModal
-          show={modalVisible}
-          onHide={() => setModalVisible(false)}
-        />
+        show={modalVisible}
+        onHide={() => setModalVisible(false)}
+      />
     </div>
-    
   );
 }

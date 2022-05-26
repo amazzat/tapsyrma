@@ -49,13 +49,13 @@ export function App() {
         }
       />
 
-      <Route 
+      <Route
         path="/projects/:id"
         element={
           <AuthGuard>
             <Boards />
           </AuthGuard>
-        }  
+        }
       />
     </Routes>
   );

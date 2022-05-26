@@ -5,14 +5,13 @@ import { useState } from "react";
 import { BoardItem } from "./BoardItem";
 import { useAddBoardMutation, useGetProjectBoardsQuery } from "../../api/index";
 
-
-export function BoardList( {project} ) {
-  const { data } = useGetProjectBoardsQuery(project.project_id)
+export function BoardList({ project }) {
+  const { data } = useGetProjectBoardsQuery(project.project_id);
   const [addBoard] = useAddBoardMutation();
-  const [ inputVisible, setInputVisible ] = useState(false)
-  const [ boardName, setBoardName] = useState("")
+  const [inputVisible, setInputVisible] = useState(false);
+  const [boardName, setBoardName] = useState("");
 
-  const handleSubmitCreateBoard = async(e) => {
+  const handleSubmitCreateBoard = async (e) => {
     e.preventDefault();
 
     if (boardName) {
@@ -25,39 +24,41 @@ export function BoardList( {project} ) {
     }
 
     setInputVisible(!inputVisible);
-  }
-
+  };
 
   return (
-    <div className=" grid grid-flow-col auto-cols-max gap-6 m-10 rounded">
+    <div className=" m-10 grid auto-cols-max grid-flow-col gap-6 rounded">
       {data?.map((board) => (
         <BoardItem key={board.board_id} board={board} />
       ))}
       <div className="w-40">
-        {inputVisible ?
-          <div
-          >
-            <form 
-              className="flex flex-column"
+        {inputVisible ? (
+          <div>
+            <form
+              className="flex-column flex"
               onSubmit={handleSubmitCreateBoard}
             >
-                <input 
-                  className="input w-full h-full" 
-                  type="text"
-                  onChange={(e) => setBoardName(e.target.value)}
-                  placeholder="Amazing board"
-                />
-                <div className="flex flex-row" >
-                  <button className="btn btn-success" type="submit">
-                    Add board
-                  </button>
-                  <button className="btn btn-error" type="button" onClick={() => setInputVisible(!inputVisible)}>
-                    Cancel
-                  </button>
-                </div>
+              <input
+                className="input h-full w-full"
+                type="text"
+                onChange={(e) => setBoardName(e.target.value)}
+                placeholder="Amazing board"
+              />
+              <div className="flex flex-row">
+                <button className="btn btn-success" type="submit">
+                  Add board
+                </button>
+                <button
+                  className="btn btn-error"
+                  type="button"
+                  onClick={() => setInputVisible(!inputVisible)}
+                >
+                  Cancel
+                </button>
+              </div>
             </form>
           </div>
-          :
+        ) : (
           <button
             type="button"
             className="btn"
@@ -65,9 +66,8 @@ export function BoardList( {project} ) {
           >
             Create board
           </button>
-        }
+        )}
       </div>
-      
     </div>
   );
 }
