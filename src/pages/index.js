@@ -3,3 +3,4 @@ export * from "./signup";
 export * from "./recover";
 export * from "./home";
 export * from "./projects";
+export * from "./boards";
