@@ -35,32 +35,47 @@ export const supabaseApi = createApi({
 
     getProjectBoards: builder.query({
       queryFn: (projectId) =>
-        supabase.from("board").select().eq("project_id", projectId)
+        supabase.from("board").select().eq("project_id", projectId),
+      providesTags: (result) =>
+        result
+          ? [...result.map(({ id }) => ({ type: "Board", id })), "Board"]
+          : ["Board"]
     }),
     addBoard: builder.mutation({
-      queryFn: ({ board }) => supabase.from("board").insert(board)
+      queryFn: ({ board }) => supabase.from("board").insert(board),
+      invalidatesTags: (arg) => [{ type: "Board", id: arg.id }]
     }),
     updateBoard: builder.mutation({
-      queryFn: ({ boardUpdates }) => supabase.from("board").upsert(boardUpdates)
+      queryFn: ({ boardUpdates }) =>
+        supabase.from("board").upsert(boardUpdates),
+      invalidatesTags: (arg) => [{ type: "Project", id: arg.id }]
     }),
     deleteBoard: builder.mutation({
       queryFn: (boardId) =>
-        supabase.from("board").delete().match({ board_id: boardId })
+        supabase.from("board").delete().match({ board_id: boardId }),
+      invalidatesTags: (arg) => [{ type: "Project", id: arg.id }]
     }),
 
     getBoardTasks: builder.query({
       queryFn: (boardId) =>
-        supabase.from("task").select().eq("board_id", boardId)
+        supabase.from("task").select().eq("board_id", boardId),
+      providesTags: (result) =>
+        result
+          ? [...result.map(({ id }) => ({ type: "Task", id })), "Task"]
+          : ["Board"]
     }),
     addTask: builder.mutation({
-      queryFn: ({ task }) => supabase.from("task").insert(task)
+      queryFn: ({ task }) => supabase.from("task").insert(task),
+      invalidatesTags: (arg) => [{ type: "Task", id: arg.id }]
     }),
     updateTask: builder.mutation({
-      queryFn: ({ taskUpdates }) => supabase.from("task").upsert(taskUpdates)
+      queryFn: ({ taskUpdates }) => supabase.from("task").upsert(taskUpdates),
+      invalidatesTags: (arg) => [{ type: "Task", id: arg.id }]
     }),
     deleteTask: builder.mutation({
       queryFn: (taskId) =>
-        supabase.from("task").delete().match({ task_id: taskId })
+        supabase.from("task").delete().match({ task_id: taskId }),
+      invalidatesTags: (arg) => [{ type: "Task", id: arg.id }]
     })
   })
 });
